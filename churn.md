@@ -2,6 +2,10 @@
 
 ## Domain Proyek
 Domain proyek yang dipilih dalam proyek machine learning ini adalah mengenai Telekomunikasi dengan judul proyek "Menganalisa Pelanggan Churn Dalam Sebulan Terakhir di Perusahaan Telekomunikasi".
+<p align="center">
+  <img width="460" height="300" src="https://s16353.pcdn.co/wp-content/uploads/2018/06/Churn.png">
+</p>
+
 ### Latar belakang :
 
 Retensi pelanggan adalah salah satu KPI (Key Performance Indicators) utama untuk perusahaan dengan model bisnis berbasis langganan. Persaingan ketat terutama di pasar SaaS (Softwere as a service, perangkat lunak yang bisa digunakan dan diakses melalui internet tanpa harus melakukan instalasi) di mana pelanggan bebas memilih dari banyak penyedia. Satu pengalaman buruk dan pelanggan mungkin saja pindah ke pesaing yang mengakibatkan churn pelanggan.
@@ -10,47 +14,36 @@ Memprediksi churn pelanggan adalah masalah bisnis yang menantang tetapi sangat p
 
 [referensi : Towards Data Science](https://towardsdatascience.com/predict-customer-churn-the-right-way-using-pycaret-8ba6541608ac)
 
-### Bussiness Understanding
+## Bussiness Understanding
 
 Customer Churn adalah persentase pelanggan yang berhenti menggunakan produk atau layanan perusahaan selama jangka waktu tertentu. Salah satu cara untuk menghitung churn rate adalah dengan membagi jumlah pelanggan yang hilang selama interval waktu tertentu dengan jumlah pelanggan aktif pada awal periode. Misalnya, jika Anda mendapatkan 1000 pelanggan dan kehilangan 50 orang dibulan lalu, maka tingkat churn bulanan Anda adalah 5 persen.
 
 ### Problem Statements
  * Bagaimana memprediksi Customer Churn dengan pendekatan model Machine Learning?
- * Bagaimana kita dapat melatih dan memilih model yang memaksimalkan nilai bisnis?
- * Dalam model churn, seringkali imbalan dari hasil positif yang sebenarnya jauh berbeda dari biaya dari hasil positif yang salah. Mari kita gunakan asumsi berikut:  
- 	1.  Voucher potongan harga sejumlah Rp.50.000,00 akan ditawarkan kepada semua pelanggan yang diidentifikasi sebagai churn (Benar Positif + Positif Salah);
- 	2.  Jika kita dapat menghentikan churn, kita akan mendapatkan Rp.200.000,00 dalam masa langganan mereka.
- 	
- Sebagai contoh, kita akan menggunakan confusion matrik dibawah ini:
- <p align="center">
-  <img width="460" height="300" src="https://github.com/ErsanSam/Predictive-Analysist-Customer-Churn-Analysist/blob/master/Confusion%20matrix.JPG">
-</p>
-
-*  Total data 2.113 baris, kita memiliki 309 True Positives (15%) — ini adalah pelanggan yang dapat kita perpanjang nilai umurnya. Jika kita tidak akan memprediksi, maka tidak ada kesempatan untuk intervensi.
-*  Kita juga memiliki 138 (7%) False Positive di mana kita akan kehilangan uang karena promosi yang ditawarkan kepada pelanggan ini hanya akan menjadi biaya tambahan.
-*  1,388 (66%) adalah True Negative (Good Customers) dan 278 (13%) adalah False Negative(peluang yang terlewatkan).
-
-Dengan menggunakan asumsi ini dan matriks konfusi di atas, kita dapat menghitung dampak nilai(Rp) dari model ini:
-
-<p align="center">
-  <img src="https://github.com/ErsanSam/Predictive-Analysist-Customer-Churn-Analysist/blob/master/estimasi_tabel.JPG">
-</p>
-
-Ini model yang bagus tapi masalahnya bukan model bisnis yang cerdas. Ini melakukan pekerjaan yang cukup baik dibandingkan jika Anda tidak memiliki model. Kita akan memaksimalkan keuntungan (nilai bisnis) dengan metrik bisnis.
+ * Bagaimana kita dapat melatih dan memilih model yang memaksimalkan nilai bisnis? Yaitu mengurangi Cost untuk promosi dan meningkatkan Revenue (laba).
+ 
 
 ### Goals
 * Tujuan utama dari model prediktif churn pelanggan adalah untuk mempertahankan pelanggan pada risiko churn tertinggi dengan terlibat secara proaktif dengan mereka. Misalnya: Tawarkan voucher hadiah atau harga promosi apa pun dan pertahankan selama satu atau dua tahun tambahan untuk memperpanjang nilai masa pakainya bagi perusahaan.
-* Memaksimalkan keuntungan, memangkas biaya yang keluar.
+* Memaksimalkan keuntungan, memangkas biaya untuk promosi.
 
-# Solution Statements
-* Membandingkan beberapa model yang bisa digunakan dengan packages pyCaret
-* Melatih, memilih, dan mengoptimalkan model menggunakan metrik bisnis (laba), bukan metrik konvensional seperti AUC atau Akurasi.
-* Menambahkan metrik laba (profit), untuk mengetahui besar profit yang akan diterima
+### Solution Statements
+* Mennggunakan 2 model ,yaitu: Model Random Forest Classifier dan Extra Tree Classifier
+* Menguji data latih dengan kedua model, lalu bandingkan kinerjanya, pilih model yang paling baik kinerjanya.
+* Mengembangkan model dengan melakukan tuning hyperparameter 
+* Menggunakan Matriks bisnis yaitu laba yang diperoleh serta cost yang dikeluarkan untuk evaluasi kinerja kedua model
+* Bandingkan kinerja model sebelum dan sesudah di tunning
+* Memberikan estimasi biaya promosi dan estimasi laba yang akan diperoleh setelah melakukan promosi
 
-## Understanding Data
-👉Dataset
+### Data Understanding
+Sumber = [Kaggle : Telco Customer Churn](https://www.kaggle.com/blastchar/telco-customer-churn)
 
-Saya menggunakan dataset [Telecom Customer Churn](https://www.kaggle.com/blastchar/telco-customer-churn) dari Kaggle. Dataset sudah berisi kolom target yang bisa kita gunakan apa adanya. 
+Dataset mencakup informasi tentang:
+
+* Pelanggan yang pergi dalam sebulan terakhir – kolomnya disebut Churn
+* Layanan yang telah didaftarkan oleh setiap pelanggan – telepon, banyak saluran, internet, keamanan online, pencadangan online, perlindungan perangkat, dukungan teknis, serta streaming TV dan film
+* Informasi akun pelanggan – sudah berapa lama mereka menjadi pelanggan, kontrak, metode pembayaran, tagihan tanpa kertas, tagihan bulanan, dan total tagihan
+* Info demografis tentang pelanggan – jenis kelamin, rentang usia, dan jika mereka memiliki pasangan dan tanggungan
 
 Berikut ini merupakan deskripsi untuk setiap variabel:
 
@@ -73,264 +66,63 @@ Berikut ini merupakan deskripsi untuk setiap variabel:
 -   `MonthlyCharges`: Jumlah pembayaran yang dilakukan setiap bulan
 -   `TotalCharges`: Jumlah total yang dibebankan oleh pelanggan
 -   `Churn`: Apakah pelanggan Churn atau tidak (Yes or No)
+### Data Preparation
+* mengimport library yang dibutuhkan
+* Menggunakan library pandas-profiling untuk efisiensi proses EDA
+* Mengganti nilai yang kosong dengan np.nan
+* Cek outliers dengan visualisasi
+* Menghapus nilai 0 di kolom tenor dan menghapus kolom customer ID
+* Visualisasi Data bertipe numerik untuk mengetahui seberapa besar korelasi antar variable numerik
+* Konversi semua kolom bertipe categorical ke numerik dan menerapkan label encoding untuk kolom bertipe categorical
+* Membagi datset menjadi data latih dan data uji
+* Treatment imbalance Dataset menggunakan teknik upsampling
+* Normalisasi data dengan MinMaxScaler dengan skala range 0 dan 1
 
-## Import Data
-
-Data yang digunakan merupakan data profil pelanggan dari sebuah perusahaan telekomunikasi yang diperoleh dari [Kaggle](https://www.kaggle.com/blastchar/telco-customer-churn). Dataset tersebut berisikan data untuk 7043 pelanggan yang meliputi demografis pelanggan, informasi pembayaran akun, serta produk layanan yang didaftarkan oleh tiap pelanggan. Dari informasi tersebut, kita ingin memprediksi apakah seorang pelanggan akan `Churn` atau tidak.
-
-## menginstall library pandas profiling untuk Exploratory Data Analysis
-```
-!pip install pandas-profiling==2.7.1
-```
-## import Library yang akan digunakan
-```
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-import seaborn as sns
-from pandas_profiling import ProfileReport
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, classification_report
-from collections import Counter
-from imblearn.over_sampling import RandomOverSampler
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import LabelEncoder
-```
-## Membaca Dataset
-```
-dataset = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
-dataset
-```
-## EDA dengan ProfileReport
-```
-ProfileReport(dataset)
-```
-
-```
-dataset.info()
-```
-## Data Cleansing
-
-Sebelum masuk ke tahap modeling, kita bersihkan datanya terlebih dahulu.
-
-Mengganti yang kolom kosong dengan np.nan dan mengganti tipe kolom Senior Citizen menjadi tipe kolom categorical 
-
-```
-dataset['TotalCharges'] = dataset['TotalCharges'].replace(' ', np.nan)
-dataset['TotalCharges'] = dataset['TotalCharges'].astype('float64')
-# konversi ke float64
-dataset['SeniorCitizen'] = dataset['SeniorCitizen'].astype('object')
-dataset = dataset.drop(dataset.columns[0], axis=1)
-```
-
-```
-dataset.describe()
-```
-Cek kelengkapan data, dari tahap ini kita akan memperoleh informasi apakah data kita sudah lengkap.
-```
-tenure = (dataset.tenure == 0).sum()
-print("Nilai 0 di kolom tenure ada: ", tenure)
-```
-cek kolom tenure yg terdapat nilai 0
-```
-dataset.loc[(dataset['tenure']==0)]
-```
-Mengambil dataset dengan kolom tenure bukan 0
-```
-dataset = dataset.loc[(dataset['tenure']!=0)]
-dataset.shape
-```
-## Analisis Univariat
-Visualisasikan kolom apakah terdapat outlier
-```
-sns.boxplot(x=dataset['tenure'])
-```
-Visualisasikan kolom apakah terdapat outlier
-```
-sns.boxplot(x=dataset['TotalCharges'])
-```
-
-```
-numerical_features = ['tenure', 'MonthlyCharges', 'TotalCharges']
-categorical_features = ['gender', 'SeniorCitizen', 'Partner', 'Dependents','PhoneService', 'MultipleLines', 'InternetService',
-       'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport',
-       'StreamingTV', 'StreamingMovies', 'Contract', 'PaperlessBilling',
-       'PaymentMethod','Churn']
-```
-## Analisis Multivariat
-Mengamati hubungan antar fitur numerik dengan fungsi pairplot()
-```
-sns.pairplot(dataset, diag_kind = 'kde')
-```
-
-```
-plt.figure(figsize=(10, 8))
-correlation_matrix = dataset.corr().round(2)
-# annot = True to print the values inside the square
-sns.heatmap(data=correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5, )
-plt.title("Correlation Matrix untuk Fitur Numerik ", size=20)
-```
-Konversi semua kolom bertipe categorical ke numerik
-```
-for column in dataset.columns:
-	if dataset[column].dtype == np.number: continue
-	# menerapkan label encoding untuk kolom bertipe categorical
-	dataset[column] = LabelEncoder().fit_transform(dataset[column])
-print(dataset.describe())
-```
-
-```
-dataset.columns
-```
-
-## Train-Test Splitting
-
-Setelah kita melakukan *data cleansing* dan eksplorasi data, tahap berikutnya adalah *train-test splitting* yaitu membagi data menjadi data *train* dan *test* dengan proporsi 80:20. Data *train* digunakan untuk membuat model sedangkan data *test* digunakan untuk mengevaluasi performa model.
-```
-X = dataset.drop(["Churn"],axis =1)
-y = dataset["Churn"]
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 15102021)
-```
-
-Mengecek isi kolom
-```
-print(f'Total # of sample in whole dataset: {len(X)}')
-print(f'Total # of sample in train dataset: {len(X_train)}')
-print(f'Total # of sample in test dataset: {len(X_test)}')
-```
-
-Mengecek distribusi data 
-```
-dataset[numerical_features].hist(bins=50, figsize=(20,15))
-plt.show()
-```
-
-Mengecek persentase data churn
-```
-print('Jumlah baris dan kolom dari x_train:', X_train.shape,'\nJumlah baris dan kolom dari y_train:', y_train.shape)
-print('Prosentase Churn di data Training adalah:')
-print(pd.Series(y_train).value_counts(normalize=True))
-```
-
-Menangani imbalance data, melakukan *upsampling*, yang artinya kita akan menyetarakan proporsi target variabel menjadi sama besar.
-```
-over_sampler = RandomOverSampler(random_state=42)
-X_res, y_res = over_sampler.fit_resample(X_train, y_train)
-print(f"Training target statistics: {Counter(y_res)}")
-print(f"Testing target statistics: {Counter(y_test)}")
-```
-
-Cek proporsi isi churn setelah di treatment 
-```
-print('Jumlah baris dan kolom dari x_train:', X_res.shape,'\nJumlah baris dan kolom dari y_train:', y_res.shape)
-print('Prosentase Churn di data Training adalah:')
-print(pd.Series(y_res).value_counts(normalize=True))
-```
-
-Normalisasi data dengan standar scaller
-```
-scaler = StandardScaler()
-scaler.fit(X_res)
-X_res = scaler.transform(X_res) 
-X_test = scaler.transform(X_test)
-print(X_res)
-print(X_test)
-```
-## Model Evaluation
-
-Terakhir, mari kita uji model random forest yang telah kita buat ke data test. Pada kasus ini, kita ingin memperoleh nilai recall yang sebesar mungkin agar model kita dapat mendeteksi pelanggan yang sebenarnya Churn sebanyak-banyaknya.
-
-Model selection dengan Logistic Regression standard
-```
-LR = LogisticRegression()
-LR.fit(X_res, y_res)
-```
-
-Model selection dengan Gradient Boosting Classifier standard
-```
-gbc = GradientBoostingClassifier()
-gbc.fit(X_res, y_res)
-```
-
-Model selection dengan Random Forest Classifier standard
-```
-rfc = RandomForestClassifier()
-rfc.fit(X_res, y_res)
-```
-
-Cek akurasi train dan test
-```
-mse = pd.DataFrame(columns=['train', 'test'], index=['Gradient Boosting Classifie', 'Logistic Regression', 'Random Forest Classifier'])
-model_dict = {'Gradient Boosting Classifie': gbc, 'Logistic Regression': LR, 'Random Forest Classifier': rfc}
-  
-for name, model in model_dict.items():
-    mse.loc[name, 'train'] = model.score(X_res, y_res)*100
-    mse.loc[name, 'test'] = model.score(X_test, y_test)*100
+### Modeling
+ Untuk pemilihan model, saya menggunakan algoritma Random Forest Classifier dan Extra Tree Classifier
+ Random Forest : 
+ * Random Forest adalah suatu algoritma yang digunakan pada klasifikasi data dalam jumlah yang besar. 
+ * Klasifikasi random forest dilakukan melalui penggabungan pohon (tree) dengan melakukan training pada sampel data yang dimiliki. 
+ * Penggunaan pohon (tree) yang semakin banyak akan mempengaruhi akurasi yang akan didapatkan menjadi lebih baik. 
+ * Penentuan klasifikasi dengan random forest diambil berdasarkan hasil voting dari tree yang terbentuk. 
+ * Pemenang dari tree yang terbentuk ditentukan dengan vote terbanyak. 
+ * Pembangunan pohon (tree) pada random forest sampai dengan mencapai ukuran maksimum dari pohon data. Akan tetapi,pembangunan pohon random forest tidak dilakukan pemangkasan (pruning) yang merupakan sebuah metode untuk mengurangi kompleksitas ruang. 
+ * Pembangunan dilakukan dengan penerapan metode random feature selection untuk meminimalisir kesalahan. 
+ * Pembentukan pohon (tree) dengan sample data menggunakan variable yang diambil secara acak dan menjalankan klasifikasi pada semua tree yang terbentuk.
+ * Random forest menggunakan Decision Tree untuk melakukan proses seleksi. 
+ * Pohon yang dibangun dibagi secara rekursif dari data pada kelas yang sama. 
+ * Pemecahan (split) digunakan untuk membagi data berdasarkan jenis atribut yang digunakan. 
+ * Pembuatan decision tree pada saat penentuan klasifikasi,pohon yang buruk akan membuat prediksi acak yang saling bertentangan. 
+ * Sehingga,beberapa decision tree akan menghasilkan jawaban yang baik. 
+ * Random forest merupakan salah satu cara penerapan dari pendekatan diskriminasi stokastik pada klasifikasi. 
+ * Proses Klasifikasi akan berjalan jika semua tree telah terbentuk.
+ * Pada saat proses klasifikasi selesai dilakukan, inisialisasi dilakukan dengan sebanyak data berdasarkan nilai akurasinya. 
+ * Keuntungan penggunaan random forest yaitu mampu mengklasifiksi data yang memiliki atribut yang tidak lengkap,dapat digunakan untuk klasifikasi dan regresi akan tetapi tidak terlalu bagus untuk regresi, lebih cocok untuk pengklasifikasian data serta dapat digunakan untuk menangani data sampel yang banyak. 
+ * Proses klasifikasi pada random forest berawal dari memecah data sampel yang ada kedalam decision tree secara acak. 
+ * Setelah pohon terbentuk,maka akan dilakukan voting pada setiap kelas dari data sampel. Kemudian, mengkombinasikan vote dari setiap kelas kemudian diambil vote yang paling banyak.Dengan menggunakan random forest pada klasifikasi data maka, akan menghasilkan vote yang paling baik 
+ Model Extra Tree Classifier :
+ * Random Forest memilih pemisahan optimal sementara Extra Tree memilihnya secara acak. Namun, setelah titik split dipilih, kedua algoritme memilih yang terbaik di antara semua subset fitur. Oleh karena itu, Pohon Ekstra menambahkan pengacakan tetapi masih memiliki pengoptimalan
  
-mse
-```
+ ### Menguji kedua model dan membandingkan kinerjanya
+ * Menguji kedua model dengan data latih, lalu memilih model dengan kinerja terbaik
+ * menampilkan klasifikasi report dari kedua model
+ ### Mengembangkan model dasar
+ * Melakukan hyperparameter tuning dan melatihnya dengan data training
+ * Bandingkan kinerja model yang telah di tuning dengan yang standard 
+ * Menampilkan confussion matrix kedua model
+ ### Evaluasi
+ * Asumsikan bahwa pelanggan yang berlangganan akan memberikan keuntungan sebesar Rp.200.000,00 per bulan.
+ * Promosi yang didapat oleh pelanggan yang diprediksi churn adalah sebesar Rp.50.000,00
+ * Menghitung Laba yang diperoleh serta Cost yang dikeluarkan oleh perusahaan berdasarkan kedua model
+ * Melilih model yang ekonomis namun dapat menghasilkan profit yang besar
+ * Memberikan estimasi biaya yang dibutuhkan kepada tim Marketing untuk promosi dan estimasi laba yang akan diperoleh / harus dicapai setelah promosi diberikan  
 
-Visualisasikan akurasi model 
-```
-fig, ax = plt.subplots()
-mse.sort_values(by='test', ascending=False).plot(kind='barh', ax=ax, zorder=3)
-ax.grid(zorder=0)
-```
-
-Memilih model RFC, kemudian cek precision,recall, f1-score dan support nya
-```
-y_test_pred = rfc.predict(X_test)
-print('Classification Report Testing Model (Random Forest Classifier):')
-print(classification_report(y_test, y_test_pred))
-```
-
-Tuning model RFC
-```
-rfc_tuned = RandomForestClassifier(bootstrap=True, ccp_alpha=0.0, class_weight={},
-                       criterion='entropy', max_depth=11, max_features='log2',
-                       min_impurity_decrease=0.001,
-                       min_samples_leaf=4, min_samples_split=10,
-                       min_weight_fraction_leaf=0.0, n_estimators=180,
-                       verbose=0)
-rfc_tuned.fit(X_res,y_res)
-```
-
-Predict
-```
-y_train_pred = rfc_tuned.predict(X_test)
-# Print classification report
-print('Classification Report Training Model (Gradient Boosting):')
-print(classification_report(y_test, y_train_pred))
-```
-
-Membuat confusion Matrix
-```
-confusion_matrix_tuned = pd.DataFrame((confusion_matrix(y_test, rfc_tuned.predict(X_test))), ('No churn', 'Churn'), ('No churn', 'Churn'))
-confusion_matrix_tuned
-```
-
-Plot confusion matrix
-```
-plt.figure()
-heatmap = sns.heatmap(confusion_matrix_tuned, annot=True, annot_kws={'size': 14}, fmt='d', cmap='YlGnBu')
-heatmap.yaxis.set_ticklabels(heatmap.yaxis.get_ticklabels(), rotation=0, ha='right', fontsize=14)
-heatmap.xaxis.set_ticklabels(heatmap.xaxis.get_ticklabels(), rotation=0, ha='right', fontsize=14)
-
-plt.title('Confusion Matrix for Training Model\n(Random Forest Classifier)', fontsize=18, color='darkblue')
-plt.ylabel('True label', fontsize=14)
-plt.xlabel('Predicted label', fontsize=14)
-plt.show()
-```
 
 # Conclusion
 
 Dengan adanya model untuk memprediksi *customer churn*, pihak perusahaan telekomunikasi dengan mudah mengetahui pelanggan mana yang memiliki kecenderungan untuk *churn*. 
-
 Dari sini, pihak *marketing* dapat melakukan promosi produk dengan sifat kontrak yang jangkanya lebih panjang sehingga para pelanggan  dapat bertahan lebih lama.
+Berdasarkan metrik dari bisnis tersebut, perusahaan akan memberikan estimasi biaya untuk promotion dan mengetahui estimasi laba yang akan diperoleh setelah melakukan promosi kepada tim marketing.
 
 # External Resources
 

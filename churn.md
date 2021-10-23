@@ -1,6 +1,7 @@
 # Laporan Proyek Machine Learning Customer Churn Analysist - Ersan Fernando Samjaya
 
 ## Domain Proyek
+Domain proyek yang dipilih dalam proyek machine learning ini adalah mengenai Telekomunikasi dengan judul proyek "Menganalisa Pelanggan Churn Dalam Sebulan Terakhir di Perusahaan Telekomunikasi".
 ### Latar belakang :
 
 Retensi pelanggan adalah salah satu KPI (Key Performance Indicators) utama untuk perusahaan dengan model bisnis berbasis langganan. Persaingan ketat terutama di pasar SaaS (Softwere as a service, perangkat lunak yang bisa digunakan dan diakses melalui internet tanpa harus melakukan instalasi) di mana pelanggan bebas memilih dari banyak penyedia. Satu pengalaman buruk dan pelanggan mungkin saja pindah ke pesaing yang mengakibatkan churn pelanggan.

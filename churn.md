@@ -28,8 +28,38 @@ Customer Churn adalah persentase pelanggan yang berhenti menggunakan produk atau
 * Memaksimalkan keuntungan, memangkas biaya untuk promosi.
 
 ### Solution Statements
-* Mennggunakan 2 model ,yaitu: Model Random Forest Classifier dan Extra Tree Classifier
-#penjelasasn algoritma
+* Menggunakan 2 model ,yaitu: Model Random Forest Classifier dan Extra Tree Classifier
+##### Penjelasan Random Forest : 
+Dalam machine learning sering kita mendengar  tentang metode Random Forest yang digunakan untuk menyelesaikan permasalahan. Metode Random Forest  merupakan salah satu metode dalam Decision Tree. Decision Tree atau pohon pengambil keputusan adalah sebuah diagram alir yang berbentuk seperti pohon yang memiliki sebuah root node yang digunakan untuk mengumpulkan data, Sebuah inner node yang berada pada root node yang berisi tentang pertanyaan tentang data dan  sebuah leaf node yang digunakan untuk memecahkan masalah serta membuat keputusan. Decision tree mengklasifikasikan suatu sampel data yang belum diketahui kelasnya kedalam kelas – kelas yang ada. Penggunaan decision tree agar dapat menghindari overfitting pada sebuah set data saat mencapai akurasi yang maksimum.
+
+Random forest  adalah kombinasi dari  masing – masing tree yang baik kemudian dikombinasikan  ke dalam satu model. Random Forest bergantung pada sebuah nilai vector random dengan distribusi yang sama pada semua pohon yang masing masing decision tree memiliki kedalaman yang maksimal. Random forest adalah classifier yang terdiri dari classifier yang berbentuk pohon {h(x, θ k ), k = 1, . . .} dimana θk adalah random vector yang diditribusikan secara independen dan masing masing tree pada sebuah unit kan memilih class yang paling popular pada input x. 
+ 
+ ###### Kelebihan Random Forest : 
+ * Keuntungan penggunaan random forest yaitu mampu mengklasifiksi data yang memiliki atribut yang tidak lengkap,dapat digunakan untuk klasifikasi dan regresi akan tetapi tidak terlalu bagus untuk regresi, lebih cocok untuk pengklasifikasian data serta dapat digunakan untuk menangani data sampel yang banyak. 
+ * Random Forest bagus untuk klasifikasi. Dapat digunakan untuk membuat prediksi kategori dengan beberapa nilai yang mungkin dan dapat dikalibrasi untuk probabilitas output.
+ * Menghasilkan eror yang lebih rendah.
+ * Memberikan hasil yang bagus dalam klasifikasi.
+ * Dapat mengatasi data training dalam jumlah sangat besar secara efisien.
+ * Metode yang efektif untuk mengestimasi hilangnya data.
+ * Dapat memperkiraan variabel apa yang penting dalam klasifikasi.
+ * Menyediakan metode eksperimental untuk mendeteksi interaksi variabel.
+ 
+ ###### Kekurangan Random Forest :
+ * Pembuatan decision tree pada saat penentuan klasifikasi,pohon yang buruk akan membuat prediksi acak yang saling bertentangan. Sehingga,beberapa decision tree akan menghasilkan jawaban yang baik. 
+ * Random Forest rawan terjadi overfitting, terutama ketika bekerja dengan dataset yang relatif kecil. Perlu di curigai jika model data dapat membuat prediksi yang "terlalu bagus" pada set uji menggunakan Random Forest. Salah satu cara overfitting adalah menggunakan fitur yang benar-benar relevan dalam model data yang digunakan.
+ * Waktu pemrosesan yang lama karena menggunakan data yang banyak dan membangun model tree yang banyak pula untuk membentuk random trees karena menggunakan single processor.
+ * Interpretasi yang sulit dan membutuhkan mode penyetelan yang tepat untuk data.
+ * Ketika digunakan untuk regresi, mereka tidak dapat memprediksi di luar kisaran dalam data percobaan, hal ini di mungkinkan data terlalu cocok dengan kumpulan data pengganggu (noisy).
+
+
+ ##### Penjelasan Extra Tree Classifier :
+  Extra Trees Classifier adalah jenis teknik pembelajaran ensemble yang menggabungkan hasil dari beberapa pohon keputusan yang tidak berkorelasi yang dikumpulkan di "forest" untuk menghasilkan hasil klasifikasinya. Secara konsep, sangat mirip dengan Random Forest Classifier dan hanya berbeda dalam cara konstruksi pohon keputusan di hutan. Random Forest memilih pemisahan optimal sementara Extra Tree memilihnya secara acak. Namun, setelah titik split dipilih, kedua algoritme memilih yang terbaik di antara semua subset fitur.
+
+##### Kelebihan Extra Tree Classifier: 
+Pohon Ekstra menambahkan pengacakan tetapi masih memiliki pengoptimalan. Setiap Pohon Keputusan di Hutan Pohon Ekstra dibangun dari sampel pelatihan asli. Kemudian, pada setiap node pengujian, Setiap pohon disediakan dengan sampel acak k-fitur dari set fitur , yang mana setiap pohon keputusan harus memilih fitur terbaik untuk membagi data berdasarkan beberapa kriteria matematis (biasanya Indeks Gini). 
+
+##### Kekurangan Extra Tree Classifier: 
+Sampel fitur acak ini mengarah pada pembuatan beberapa pohon keputusan yang tidak berkorelasi.
 
 ### Data Understanding
 Sumber = [Kaggle : Telco Customer Churn](https://www.kaggle.com/blastchar/telco-customer-churn)
@@ -62,43 +92,19 @@ Berikut ini merupakan deskripsi untuk setiap variabel:
 -   `MonthlyCharges`: Jumlah pembayaran yang dilakukan setiap bulan
 -   `TotalCharges`: Jumlah total yang dibebankan oleh pelanggan
 -   `Churn`: Apakah pelanggan Churn atau tidak (Yes or No)
-### Data Preparation
-* mengimport library yang dibutuhkan
-* Menggunakan library pandas-profiling untuk efisiensi proses EDA
-* Mengganti nilai yang kosong dengan np.nan
-* Cek outliers dengan visualisasi
-* Menghapus nilai 0 di kolom tenor dan menghapus kolom customer ID
-* Visualisasi Data bertipe numerik untuk mengetahui seberapa besar korelasi antar variable numerik
-* Konversi semua kolom bertipe categorical ke numerik dan menerapkan label encoding untuk kolom bertipe categorical
-* Membagi datset menjadi data latih dan data uji
-* Treatment imbalance Dataset menggunakan teknik upsampling
-* Normalisasi data dengan MinMaxScaler dengan skala range 0 dan 1
+### Data Preparation/Prepocessing
+ Mengapa data perlu di-preprocessing? Karena data masih belum siap untuk diproses di Model machine Learning. Jika tanpa Data preprocessing, maka hasil analisa akan terjadi bias, kurang akurat, waktu training yang lama, dll.
+* Cek outliers dengan visualisasi. Outliers adalah data yang memiliki nilai sangat jauh dari nilai umumnya, atau dengan kata lain memiliki nilai yang ekstrem. Adanya outliers ini dapat berpengaruh pada hasil uji asumsi, seperti uji normalitas, lineraritas, maupun homogenitas varians. Lebih parah lagi, outliers ini dapat berpengaruh pada pegambilan kesimpulan penelitian dari hasil uji statistik
+* Mengganti nilai yang kosong dengan np.nan. kolom TotalCharges adalah tipe objek, bukan float64. Setelah diselidiki, saya menemukan ada beberapa ruang kosong di kolom ini yang menyebabkan Python memaksa tipe data sebagai object . Untuk memperbaikinya, kita harus trimming ruang kosong itu  sebelum mengubah tipe data. Kemudian mengisinya dengan rata-rata (mean) dikarenakan tidak terdapat outliers pada kolom tersebut.
+* Menghapus nilai 0 di kolom tenor dan menghapus kolom customer ID. Kita bisa menghapus kolom tenor yang bernilai 0 dikarenakan tidak bisa mengisinya dengan nilai mean ataupun median, dan karena jumlahnya hanya 11, tidak akan berdampak besar terhadap hasil analisa. Kemudian menghapus kolom customer ID, karena kita tidak akan menggunakan data tersebut.
+* Visualisasi Data pada kolom bertipe category untuk mengetahui korelasi dengan kolom target
+* Visualisasi Data pada kolom bertipe numerik untuk mengetahui seberapa besar korelasi antar variable numerik
+* Konversi semua kolom bertipe categorical ke numerik dan menerapkan label encoding untuk kolom bertipe categorical. Model Machine Learning hanya bisa memproses data angka, bukan data teks, sehingga perlu dilakukan konversi.
+* Membagi dataset menjadi data latih dan data uji, bertujuan untuk menghindari terjadinya overfitting, yaitu suatu kondisi pelatihan yang hasil uji terhadap data yang dilatih sangat bagus tetapi diuji oleh data lain yang tidak digunakan dalam pelatihan sangat buruk
+* Treatment imbalance Dataset menggunakan teknik upsampling, bertujuan agar model Machine Learning meminimalisir kekeliruan dalam memprediksi target 
+* Normalisasi data dengan MinMaxScaler dengan skala range 0 dan 1, bertujuan untuk membuat nilai data menjadi lebih kecil tanpa merubah informasi yang dikandungnya
 
 ### Modeling
- Untuk pemilihan model, saya menggunakan algoritma Random Forest Classifier dan Extra Tree Classifier
- Random Forest : 
- * Random Forest adalah suatu algoritma yang digunakan pada klasifikasi data dalam jumlah yang besar. 
- * Klasifikasi random forest dilakukan melalui penggabungan pohon (tree) dengan melakukan training pada sampel data yang dimiliki. 
- * Penggunaan pohon (tree) yang semakin banyak akan mempengaruhi akurasi yang akan didapatkan menjadi lebih baik. 
- * Penentuan klasifikasi dengan random forest diambil berdasarkan hasil voting dari tree yang terbentuk. 
- * Pemenang dari tree yang terbentuk ditentukan dengan vote terbanyak. 
- * Pembangunan pohon (tree) pada random forest sampai dengan mencapai ukuran maksimum dari pohon data. Akan tetapi,pembangunan pohon random forest tidak dilakukan pemangkasan (pruning) yang merupakan sebuah metode untuk mengurangi kompleksitas ruang. 
- * Pembangunan dilakukan dengan penerapan metode random feature selection untuk meminimalisir kesalahan. 
- * Pembentukan pohon (tree) dengan sample data menggunakan variable yang diambil secara acak dan menjalankan klasifikasi pada semua tree yang terbentuk.
- * Random forest menggunakan Decision Tree untuk melakukan proses seleksi. 
- * Pohon yang dibangun dibagi secara rekursif dari data pada kelas yang sama. 
- * Pemecahan (split) digunakan untuk membagi data berdasarkan jenis atribut yang digunakan. 
- * Pembuatan decision tree pada saat penentuan klasifikasi,pohon yang buruk akan membuat prediksi acak yang saling bertentangan. 
- * Sehingga,beberapa decision tree akan menghasilkan jawaban yang baik. 
- * Random forest merupakan salah satu cara penerapan dari pendekatan diskriminasi stokastik pada klasifikasi. 
- * Proses Klasifikasi akan berjalan jika semua tree telah terbentuk.
- * Pada saat proses klasifikasi selesai dilakukan, inisialisasi dilakukan dengan sebanyak data berdasarkan nilai akurasinya. 
- * Keuntungan penggunaan random forest yaitu mampu mengklasifiksi data yang memiliki atribut yang tidak lengkap,dapat digunakan untuk klasifikasi dan regresi akan tetapi tidak terlalu bagus untuk regresi, lebih cocok untuk pengklasifikasian data serta dapat digunakan untuk menangani data sampel yang banyak. 
- * Proses klasifikasi pada random forest berawal dari memecah data sampel yang ada kedalam decision tree secara acak. 
- * Setelah pohon terbentuk,maka akan dilakukan voting pada setiap kelas dari data sampel. Kemudian, mengkombinasikan vote dari setiap kelas kemudian diambil vote yang paling banyak.Dengan menggunakan random forest pada klasifikasi data maka, akan menghasilkan vote yang paling baik 
- Model Extra Tree Classifier :
- * Random Forest memilih pemisahan optimal sementara Extra Tree memilihnya secara acak. Namun, setelah titik split dipilih, kedua algoritme memilih yang terbaik di antara semua subset fitur. Oleh karena itu, Pohon Ekstra menambahkan pengacakan tetapi masih memiliki pengoptimalan
-
 * Menguji data latih dengan kedua model, lalu bandingkan kinerjanya, pilih model yang paling baik kinerjanya.
 * Mengembangkan model dengan melakukan tuning hyperparameter 
 * Menggunakan Matriks bisnis yaitu laba yang diperoleh serta cost yang dikeluarkan untuk evaluasi kinerja kedua model
@@ -113,6 +119,11 @@ Berikut ini merupakan deskripsi untuk setiap variabel:
  * Bandingkan kinerja model yang telah di tuning dengan yang standard 
  * Menampilkan confussion matrix kedua model
  ### Evaluasi
+ Kita dapat menggunakan 2 buah metrik. Yaitu Metrik F1-Score dan metrik laba/profit/untung.
+ F1- Score:
+ * F1-Score merupakan perbandingan rata-rata presisi dan recall yang dibobotkan. F1 Score = 2 * (Recall*Precission) / (Recall + Precission).
+ 
+ Bisnis:
  * Asumsikan bahwa pelanggan yang berlangganan akan memberikan keuntungan sebesar Rp.200.000,00 per bulan.
  * Promosi yang didapat oleh pelanggan yang diprediksi churn adalah sebesar Rp.50.000,00
  * Menghitung Laba yang diperoleh serta Cost yang dikeluarkan oleh perusahaan berdasarkan kedua model
@@ -120,11 +131,12 @@ Berikut ini merupakan deskripsi untuk setiap variabel:
  * Memberikan estimasi biaya yang dibutuhkan kepada tim Marketing untuk promosi dan estimasi laba yang akan diperoleh / harus dicapai setelah promosi diberikan  
 
 
-# Conclusion
+### Conclusion
+1. Apabila keputusan diambil berdasarkan besarnya nilai F1-Score, maka tuned model lah yang akan dipilih.
 
-Dengan adanya model untuk memprediksi *customer churn*, pihak perusahaan telekomunikasi dengan mudah mengetahui pelanggan mana yang memiliki kecenderungan untuk *churn*. 
-Dari sini, pihak *marketing* dapat melakukan promosi produk dengan sifat kontrak yang jangkanya lebih panjang sehingga para pelanggan  dapat bertahan lebih lama.
-Berdasarkan metrik dari bisnis tersebut, perusahaan akan memberikan estimasi biaya untuk promotion dan mengetahui estimasi laba yang akan diperoleh setelah melakukan promosi kepada tim marketing.
+2. Sedangkan apabila keputusan diambil berdasarkan metrik bisnis, maka akan memilih model dengan laba yang besar serta cost yang seminimum mungkin.
+Berdasarkan metrik dari bisnis tersebut, meskipun base model memiliki nilai F1-Score yang lebih kecil, namun laba yang dihasilkan lebih besar,yaitu sebesar Rp.191.450.000,00;  jika dibandingkan dengan model yang telah dituning menggunakan hyper parameters, yaitu hanya sebesar Rp.183.000.000,00. Selain itu cost yang digunakan oleh base model lebih sedikit, yaitu dengan estimasi sebesar Rp. 17.150.000,00, sedangkan cost yang dibutuhkan oleh tuning model adalah dengan estimasi sebesar Rp.28.800.000  Sehingga dapat disimpulkan:
+Perusahaan akan memberikan estimasi biaya untuk promotion sebesar  Rp.17.000.000 kepada team marketing. Dengan estimasi keuntungan sebesar Rp. 191.450.000,00.
 
 # External Resources
 

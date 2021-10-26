@@ -20,7 +20,7 @@ Customer Churn adalah persentase pelanggan yang berhenti menggunakan produk atau
 
 ### Problem Statements
  * Bagaimana memprediksi Customer Churn dengan pendekatan model Machine Learning?
- * Bagaimana kita dapat melatih dan memilih model yang memaksimalkan nilai bisnis? Yaitu mengurangi Cost untuk promosi dan meningkatkan Revenue (laba).
+ * Bagaimana kita dapat melatih dan memilih model yang memaksimalkan nilai bisnis?
  
 
 ### Goals
@@ -29,11 +29,7 @@ Customer Churn adalah persentase pelanggan yang berhenti menggunakan produk atau
 
 ### Solution Statements
 * Mennggunakan 2 model ,yaitu: Model Random Forest Classifier dan Extra Tree Classifier
-* Menguji data latih dengan kedua model, lalu bandingkan kinerjanya, pilih model yang paling baik kinerjanya.
-* Mengembangkan model dengan melakukan tuning hyperparameter 
-* Menggunakan Matriks bisnis yaitu laba yang diperoleh serta cost yang dikeluarkan untuk evaluasi kinerja kedua model
-* Bandingkan kinerja model sebelum dan sesudah di tunning
-* Memberikan estimasi biaya promosi dan estimasi laba yang akan diperoleh setelah melakukan promosi
+#penjelasasn algoritma
 
 ### Data Understanding
 Sumber = [Kaggle : Telco Customer Churn](https://www.kaggle.com/blastchar/telco-customer-churn)
@@ -102,6 +98,12 @@ Berikut ini merupakan deskripsi untuk setiap variabel:
  * Setelah pohon terbentuk,maka akan dilakukan voting pada setiap kelas dari data sampel. Kemudian, mengkombinasikan vote dari setiap kelas kemudian diambil vote yang paling banyak.Dengan menggunakan random forest pada klasifikasi data maka, akan menghasilkan vote yang paling baik 
  Model Extra Tree Classifier :
  * Random Forest memilih pemisahan optimal sementara Extra Tree memilihnya secara acak. Namun, setelah titik split dipilih, kedua algoritme memilih yang terbaik di antara semua subset fitur. Oleh karena itu, Pohon Ekstra menambahkan pengacakan tetapi masih memiliki pengoptimalan
+
+* Menguji data latih dengan kedua model, lalu bandingkan kinerjanya, pilih model yang paling baik kinerjanya.
+* Mengembangkan model dengan melakukan tuning hyperparameter 
+* Menggunakan Matriks bisnis yaitu laba yang diperoleh serta cost yang dikeluarkan untuk evaluasi kinerja kedua model
+* Bandingkan kinerja model sebelum dan sesudah di tunning
+* Memberikan estimasi biaya promosi dan estimasi laba yang akan diperoleh setelah melakukan promosi
  
  ### Menguji kedua model dan membandingkan kinerjanya
  * Menguji kedua model dengan data latih, lalu memilih model dengan kinerja terbaik
